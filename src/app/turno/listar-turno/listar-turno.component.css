@@ -1,0 +1,14 @@
+a{
+    margin-right: 1rem;
+}
+form{
+    max-width: 60%;
+}
+
+.btn{
+    margin-bottom: 1rem;    
+}
+mat-form-field{    
+    width: 40%;
+    margin-right: 1rem;
+}

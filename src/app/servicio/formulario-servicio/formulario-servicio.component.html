@@ -1,0 +1,41 @@
+
+<form (submit)="guardarCambios()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>NOMBRE SERVICIO</mat-label>
+      <input formControlName="nomServicio" matInput />
+      <mat-error *ngIf="this.form.get('nomServicio')?.errors?.['required']">Nombre es requerido!</mat-error>
+    </mat-form-field>
+
+    <input formControlName="idComercio"  type="hidden" />  
+
+    <mat-form-field appearance="outline">
+      <input formControlName="horaApertura" matInput [ngxTimepicker]="picker1" 
+      placeholder="HORA APERTURA HH:MM" [format]="24"  />
+      <ngx-material-timepicker #picker1></ngx-material-timepicker>
+      <mat-error *ngIf="this.form.get('horaApertura')?.errors?.['required']">Hora es requerida!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input formControlName="horaCierre" matInput [ngxTimepicker]="picker2" 
+      placeholder="HORA CIERRE HH:MM" [format]="24"  (ngModelChange)="validacionHora()"/>
+      <ngx-material-timepicker #picker2></ngx-material-timepicker>
+      <mat-error *ngIf="this.form.get('horaCierre')?.errors?.['required']">Hora es requerida!</mat-error>
+      <mat-error *ngIf="form.get('horaCierre')?.errors?.horaInvalida">Hora debe ser mayor a la de apertura!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="txtsmall">
+      <mat-label>DURACION</mat-label>
+      <input type="number" formControlName="duracion" matInput />
+      <mat-error *ngIf="this.form.get('duracion')?.errors?.['required']">Duración es requerida!</mat-error>
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button color="primary" [disabled]="form.invalid">
+        GUARDAR
+      </button>
+      <a mat-stroked-button routerLink="/servicio/listar">CANCELAR</a>
+    </div>
+    
+    
+     
+</form>

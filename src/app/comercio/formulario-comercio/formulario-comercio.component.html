@@ -1,0 +1,23 @@
+<form (submit)="guardarCambios()" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>NOMBRE COMERCIO</mat-label>
+    <input formControlName="nomComercio" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="txtAforo">
+    <mat-label>AFORO MAXIMO</mat-label>
+    <input type="number" formControlName="aforoMaximo" matInput />
+  </mat-form-field>
+  <div>
+    <button mat-flat-button color="primary" [disabled]="form.invalid">
+      GUARDAR
+    </button>
+    <a mat-stroked-button routerLink="/comercio/listar">CANCELAR</a>
+  </div>
+  
+  <!-- <mat-form-field appearance="outline">
+    <input matInput [ngxTimepicker]="picker" placeholder="HH:MM" [format]="24" />
+    <ngx-material-timepicker #picker></ngx-material-timepicker>
+  </mat-form-field> -->
+   
+</form>
+

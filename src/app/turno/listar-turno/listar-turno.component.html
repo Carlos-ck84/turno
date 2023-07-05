@@ -1,0 +1,84 @@
+<form [formGroup]="form">
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Selecciona un comercio</mat-label>
+    <mat-select
+      formControlName="comercioSel"
+      (selectionChange)="seleccionComercio()"
+      required=""
+    >
+      <mat-option
+        *ngFor="let option of listaComercios"
+        [value]="option.idComercio"
+      >
+        {{ option.nomComercio }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Selecciona un servicio</mat-label>
+    <mat-select
+      formControlName="servicioSel"
+      (selectionChange)="seleccionServicio()"
+      required=""
+    >
+      <mat-option
+        *ngFor="let option of listaServicios"
+        [value]="option.idServicio"
+      >
+        {{ option.nomServicio }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha Inicio</mat-label>
+    <input formControlName="fechaInicio" matInput [matDatepicker]="picker1" [(ngModel)]="date1" />
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha Fin</mat-label>
+    <input formControlName="fechaFin" matInput [matDatepicker]="picker2" [(ngModel)]="date2"/>
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <button
+    mat-flat-button     
+    type="button"
+    color="primary"
+    (click)="generarTurno()"
+    class="btn"
+    [disabled]="form.invalid"
+  >
+    Generar Turno
+  </button>
+
+  <ng-container contenido>
+    <table #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="fechaTurno">
+        <th mat-header-cell *matHeaderCellDef>Fecha Turno</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaTurno | date }}</td>
+      </ng-container>
+      <ng-container matColumnDef="horaInicio">
+        <th mat-header-cell *matHeaderCellDef>Hora Inicio</th>
+        <td mat-cell *matCellDef="let element">{{ element.horaInicio }}</td>
+      </ng-container>
+      <ng-container matColumnDef="horaFin">
+        <th mat-header-cell *matHeaderCellDef>Hora Fin</th>
+        <td mat-cell *matCellDef="let element">{{ element.horaFin }}</td>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[7]" 
+showFirstLastButtons></mat-paginator>
+  </ng-container>
+</form>
